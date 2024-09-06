@@ -17,6 +17,11 @@ export const ButtonsBlockSettings = ({ options, onOptionsChange }: Props) => {
   const { t } = useTranslate()
   const updateIsMultiple = (isMultipleChoice: boolean) =>
     onOptionsChange({ ...options, isMultipleChoice })
+  const updateDisableRetryButton = (enableValidateButton: boolean) =>
+    onOptionsChange({ ...options, enableValidateButton })
+  const updateTextRetryButton = (buttonValidationMessage: string) =>
+    onOptionsChange({ ...options, buttonValidationMessage })
+
   const updateIsSearchable = (isSearchable: boolean) =>
     onOptionsChange({ ...options, isSearchable })
   const updateButtonLabel = (buttonLabel: string) =>
@@ -44,6 +49,23 @@ export const ButtonsBlockSettings = ({ options, onOptionsChange }: Props) => {
             options?.buttonLabel ?? t('blocks.inputs.settings.buttonText.label')
           }
           onChange={updateButtonLabel}
+        />
+      </SwitchWithRelatedSettings>
+      <SwitchWithRelatedSettings
+        label={t('blocks.inputs.settings.enableButtonValidation.label')}
+        initialValue={
+          options?.enableValidateButton ??
+          defaultChoiceInputOptions.enableValidateButton
+        }
+        onCheckChange={updateDisableRetryButton}
+      >
+        <TextInput
+          label={t('blocks.inputs.settings.enableButtonValidationText.label')}
+          defaultValue={
+            options?.buttonValidationMessage ??
+            defaultChoiceInputOptions.buttonValidationMessage
+          }
+          onChange={updateTextRetryButton}
         />
       </SwitchWithRelatedSettings>
       <SwitchWithRelatedSettings
